@@ -8,12 +8,12 @@ use Kreait\Firebase\Messaging\Notification;
 
 // https://firebase-php.readthedocs.io/en/latest/cloud-messaging.html
 
-$firebase = (new Factory)->withServiceAccount('estbujin-firebase-adminsdk-cv9vm-da1ecc6d7b.json');
+$firebase = (new Factory)->withServiceAccount('ilmateenistus-df438-firebase-adminsdk-wvkwv-3b74a1a5c6.json');
 
 $messaging = $firebase->createMessaging();
 
-$title = "Story Title";
-$message = "Message Body.";
+$title = "Imateenistus";
+$message = "Tormi hoiatus!";
 
 $notification = Notification::fromArray(
     [
@@ -22,7 +22,8 @@ $notification = Notification::fromArray(
     ]
 );
 
-$deviceToken = 'ds-QNKowQGik1jOnYBq8Qq:APA91bH_AdakdACOzA808oMj7Df3AgRHwOals704f9-_5HJVUVOb-vjFHjOWT20A8Q3q8zgo4V9PxeyB_h-J-bTAGar7I8LXUaKFLoxuohqgYJQWNuUPah_DMOEjD9jWfJqnSsGa_rLW';
+# Indrek
+$deviceToken = 'dP-2UkD7SLyjUvbpRBTUwj:APA91bFyYAqxc97HZ_dUZWGq-P7gVSPaQFLCanJWqpRiuZHwZ-c5Uwyj1cHsM-zXDBwyhd0D3Olg8idZAPlcPk9P85l_h79hVh9DtIz0DQvE3Imj8csdtY-qVp0Wx5LtMdWS7mQvwId0';
 
 $message = CloudMessage::withTarget('token', $deviceToken)
     ->withNotification($notification);
