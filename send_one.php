@@ -6,28 +6,41 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 
-// https://firebase-php.readthedocs.io/en/latest/cloud-messaging.html
-
 $firebase = (new Factory)->withServiceAccount('ilmateenistus-df438-firebase-adminsdk-wvkwv-3b74a1a5c6.json');
 
 $messaging = $firebase->createMessaging();
 
-$title = "Imateenistus";
-$message = "Tormi hoiatus!";
-
 $notification = Notification::fromArray(
     [
-        'title' => $title,
-        'body' => $message,
+        'title' => "Imateenistus",
+        'body' => "Ilusat talveilma.",
     ]
 );
 
-# Indrek
-$deviceToken = 'dP-2UkD7SLyjUvbpRBTUwj:APA91bFyYAqxc97HZ_dUZWGq-P7gVSPaQFLCanJWqpRiuZHwZ-c5Uwyj1cHsM-zXDBwyhd0D3Olg8idZAPlcPk9P85l_h79hVh9DtIz0DQvE3Imj8csdtY-qVp0Wx5LtMdWS7mQvwId0';
+# Indrek, Android
+#$deviceToken = 'dxJPGa5hTmS5wZ4BsgYJm0:APA91bFqmb5m-dvjnx-8l3cOr1EtIODKtoLP3SEcENp2U77yAdW5zFZ-f3tyR98gn7VuLCd0nh87WxAOIUsze8qic46-xCcwfUm0bDrgpi9D5sNJYLmSixxhnhg1wBeejHCcELNCcRmV';
 
+# Indrek, iOS
+$deviceToken = 'cE67AO3LdElar5N9yIFFVe:APA91bFk0y51Ajq9G51nozhHkGqmqgvBYxPH5r40LM1xmMAjrFWoC3BS_W1bCBliTiJw2pybFdd6sSU2R3reV3uvgVbvZ_rFoRdM4YcAp-y3DSZ8JmSK47dOUUhVpVjbrMato2-N-JvL';
+
+$data = [
+    'name' => 'Hoiatus (Võru maakond)!!!!!',
+    'description' => '26.01 hommikul ja päeval tihe lumesadu, prognoositav lisanduv lumehulk hilisõhtuks 7-11 cm.',
+    'level' => 1
+];
+
+# Example 1: working!
 $message = CloudMessage::withTarget('token', $deviceToken)
     ->withNotification($notification);
-
 $messaging->send($message);
 
-print "Push message are sent!";
+# Example 2: working, but $data not arrive anywhere!
+$message = CloudMessage::withTarget('token', $deviceToken)
+    ->withNotification($notification)
+    ->withData($data);
+$messaging->send($message);
+
+# Example 3: NOT working!
+$message = CloudMessage::withTarget('token', $deviceToken)
+    ->withData($data);
+$messaging->send($message);
