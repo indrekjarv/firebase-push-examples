@@ -41,6 +41,8 @@ $message = CloudMessage::withTarget('token', $deviceToken)
 $messaging->send($message);
 
 # Example 3: NOT working!
+#@Joseph- This should be working in Android. Adding ->withNotification($notification) the onMessageReceived() method will not trigger when the app is in background. So don't call withNotification()
+#Please test it using Android app version 1.13
 $message = CloudMessage::withTarget('token', $deviceToken)
     ->withData($data);
 $messaging->send($message);
