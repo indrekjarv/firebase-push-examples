@@ -1,4 +1,9 @@
-EstBujin Firebase Push Messaging
+Firebase Push Messaging test:
 
-> composer require kreait/firebase-php
+git clone https://github.com/indrekjarv/firebase-push-examples.git
 
+cd firebase-push-examples
+
+composer install
+
+php send_one.php
