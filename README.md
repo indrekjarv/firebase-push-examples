@@ -7,3 +7,5 @@ cd firebase-push-examples
 composer install
 
 php send_one.php
+
+php send_one.php
